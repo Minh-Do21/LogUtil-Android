@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SpaceShareClass spaceShareClass = new SpaceShareClass(new CallBackData() {
+        SpaceShareClass spaceShareClass = new SpaceShareClass(this, new CallBackData() {
             @Override
             public void callBackData(String data) {
                 if (data != null){
@@ -37,54 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         spaceShareClass.login("minhdo170920@gmail.com", "Minhdo123");
-
-        //get các dữ nhiệu như yêu cầu của khách hàng
-        StringBuilder builder = new StringBuilder();
-        builder.append("android : ").append(Build.VERSION.RELEASE);
-
-        Field[] fields = Build.VERSION_CODES.class.getFields();
-        for (Field field : fields) {
-            String fieldName = field.getName();
-            int fieldValue = -1;
-
-            try {
-                fieldValue = field.getInt(new Object());
-            } catch (IllegalArgumentException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-            }
-
-            if (fieldValue == Build.VERSION.SDK_INT) {
-                builder.append(" : ").append(fieldName).append(" : ");
-                builder.append("sdk=").append(fieldValue);
-            }
-        }
-        Log.d("LOG_TAG", "OS: " + builder.toString());
-
-        String deviceOs = Build.VERSION.RELEASE;
-        Log.d("LOG_TAG", "OS Version: " + deviceOs);
-
-
-        WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
-        String ipAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
-        Log.d("LOG_TAG", "Địa chỉ IP: " + ipAddress);
-
-        String AndroidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-
-        Log.d("LOG_TAG", "AndroidID: " + AndroidID);
-
-
-        LocaleListCompat llc = ConfigurationCompat.getLocales(Resources.getSystem().getConfiguration());
-        for (int i=0; i<llc.size(); i++){
-            Log.d("LOG_TAG", "Language: " + llc.get(i).getDisplayLanguage());
-        }
-
-        FromLogin fromLogin = new FromLogin(this);
     }
 
 }
