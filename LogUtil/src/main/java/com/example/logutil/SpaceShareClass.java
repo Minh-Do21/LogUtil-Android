@@ -91,6 +91,8 @@ public class  SpaceShareClass {
             UserLogin userLogin = new UserLogin(email, passWord);
             //call api get list office
             postLogin(userLogin);
+        }else {
+            callBackData.callBackData(null);
         }
 
     }
